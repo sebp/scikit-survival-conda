@@ -1,14 +1,15 @@
 {% set name = "scikit-survival" %}
 {% set version = "0.3" %}
+{% set sha256 = "20d8cf2df4b55276600b4fa188424b4e415f9834a58609fac7cdb277ce9ad8f8" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-#  path: ..
-  git_rev: v0.3
-  git_url: https://github.com/sebp/scikit-survival
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
 
 build:
   # If this is a new build for the same version, increment the build
@@ -21,7 +22,8 @@ requirements:
     - python {{ python }}
     - setuptools
     - setuptools_scm
-    - gcc
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - numpy {{ numpy }}
     - scipy >=0.16
 
