@@ -1,0 +1,11 @@
+# The language in this case has no bearing - we are going to be making use of conda.
+language: generic
+
+install:
+    # Install Miniconda.
+    - ./install_miniconda.sh
+
+script:
+    - conda build ./recipe
+    # from https://github.com/conda-forge/conda-forge-build-setup-feedstock/blob/master/recipe/upload_or_check_non_existence.py
+    - ./upload_or_check_non_existence ./recipe sebp --channel=main
