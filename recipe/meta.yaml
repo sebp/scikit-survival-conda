@@ -25,9 +25,7 @@ requirements:
     - python {{ python }}
     - setuptools
     - setuptools_scm
-    - gcc  # [py34]
-    - {{ compiler('c') }}  # [not py34]
-    - {{ compiler('cxx') }}  # [not py34]
+    - cython
     - numpy {{ numpy }}
     - scipy >=0.16
 
