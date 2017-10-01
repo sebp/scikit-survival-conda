@@ -1,6 +1,11 @@
 # The language in this case has no bearing - we are going to be making use of conda.
 language: generic
 
+# Set BINSTAR_TOKEN
+env:
+    global:
+         secure: SX6fiROltY7wIUG/m9KmlbylsW+rtF6egHaYcdDxVuqu6P5TZfoytODTYDY7rQpzmrmplXYYaJmQDVyZsuDET8uBdMVG+yCdAswzGgX5csZ11tchm2PLOrg4UysZ0PX7rjDGRf+UoUBv2uzw9GQx4cmNjMqnpXulrZkeBk0vjOL8uQr02uRkCmDOiDoiRU9zsMkwqBA+eN3JYoIn4LWQ8bzW900BL/MCbvRmyCl3eUYzhL2HLNyReK+3i8nHbrkkxITdYj5x0+2McAbjiQDZEKs6YxT5O6QbL1zCU7rIz3++m+VtyqcP3cPLBMe2gA2jp6yYtUmFRn1hoJAT4U4zlMrBBTSCn9Yyro/FsobRu3ERmj9MLgx9o/MonF4wkdaI9bfB/SHfzxS9Ub+6hvzHQab+YVgXZIUTUn79WpmU57ox7XmWRFsPJxe/JRwC2gVF24ZZPBI4Vk5v+NYW6syzXXE2PoHvADxXu1gXI+aAQdaYUB90Rw9m10Txxb2YL8E+1FX3XHXshkNChXiZKSMwsqxwrFXWN674ul89alF8+Eu/vAcjobKuGTZpKdJA9BYKqySIg4e7qQ1sGkX0fqPIf3ZBzwyweDjg2oQSNyEWAFtZVnFtLOoVHAVdbubVBw+//TK0vYSinWjH50KO8ilme3v0Qz5k/Xo8fGujUGY6bOM=
+
 install:
     # Install Miniconda.
     - ./install_miniconda.sh
