@@ -13,3 +13,5 @@ conda install -n root --yes --quiet anaconda-client conda-build setuptools
 
 conda info
 conda config --get
+
+export PATH=~/miniconda/bin:$PATH
