@@ -1,6 +1,10 @@
 # The language in this case has no bearing - we are going to be making use of conda.
 language: generic
 
+global:
+    # The BINSTAR_TOKEN secure variable. This is defined canonically in conda-forge.yml.
+    - secure: ""
+
 install:
     # Install Miniconda.
     - ./install_miniconda.sh
