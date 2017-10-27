@@ -38,7 +38,7 @@ def upload(cli, fname, meta, owner, channels):
     try:
         with open('binstar.token', 'w') as fh:
             fh.write(cli.token)
-        subprocess.check_call(['anaconda', '--quiet', '-t', 'binstar.token',
+        subprocess.check_call(['anaconda', '-t', 'binstar.token',
                                'upload', fname,
                                '--user={}'.format(owner),
                                '--channel={}'.format(channels)],
