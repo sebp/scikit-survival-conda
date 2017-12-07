@@ -1,0 +1,32 @@
+# AppVeyor.com is a Continuous Integration service to build and run tests under
+# Windows
+
+environment:
+  # see https://www.appveyor.com/docs/build-environment/#python
+  matrix:
+    - TARGET_ARCH: "x64"
+      CONDA_PY: "36"
+      CONDA_INSTALL_LOCN: "C:\\Miniconda36-x64"
+
+# We always use a 64-bit machine.
+platform:
+- x64
+
+install:
+  - cmd: set "PATH=%CONDA_INSTALL_LOCN%\\Scripts;%CONDA_INSTALL_LOCN%\\Library\\bin;%PATH%"
+  - cmd: conda update --yes --quiet conda conda-env
+  - cmd: conda config --set show_channel_urls true
+  - cmd: conda config --set add_pip_as_python_dependency false
+  - cmd: conda config --add channels sebp
+  - cmd: call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
+  - cmd: conda install -n root --yes --quiet anaconda-client conda-build setuptools
+  - cmd: conda info
+  - cmd: conda config --get
+  - cmd: conda build ./recipe
+
+on_success:
+  - cmd: call upload_or_check_non_existence recipe sebp --channel=main
+
+
+# Skip .NET project specific build phase.
+build: off
