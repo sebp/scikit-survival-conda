@@ -1,0 +1,26 @@
+version: 2
+jobs:
+  build:
+    machine: true
+
+    steps:
+      - checkout
+
+      # Install
+      - run:
+          name: Install Miniconda3
+          command: ./install_miniconda.sh
+
+      # Build
+      - run:
+          name: Build package
+          command: |
+            source ~/miniconda/bin/activate root
+            conda build ./recipe
+
+      # Upload
+      - run:
+          name: Upload packages
+          command: |
+            source ~/miniconda/bin/activate root
+            ./upload_or_check_non_existence ./recipe sebp --channel=main
