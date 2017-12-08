@@ -10,5 +10,9 @@ Conda package for scikit-survival
    :target: https://ci.appveyor.com/project/sebp/scikit-survival-conda
    :alt: AppVeyor Build Status
 
+.. image:: https://circleci.com/gh/sebp/scikit-survival-conda/tree/master.svg?style=svg
+    :target: https://circleci.com/gh/sebp/scikit-survival-conda/tree/master
+    :alt: CircleCI
+
 This repository contains the `conda <https://conda.io/docs/user-guide/tasks/build-packages/>`_
 recipe for `scikit-survival <https://github.com/sebp/scikit-survival/>`_.
