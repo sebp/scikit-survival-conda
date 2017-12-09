@@ -25,7 +25,7 @@ install:
   - cmd: conda build ./recipe
 
 on_success:
-  - cmd: call upload_or_check_non_existence recipe sebp --channel=main
+  - cmd: python upload_or_check_non_existence recipe sebp --channel=main
 
 
 # Skip .NET project specific build phase.
