@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -ve
 
-wget https://raw.githubusercontent.com/pelson/Obvious-CI/master/bootstrap-obvious-ci-and-miniconda.py
+curl -fsSL https://raw.githubusercontent.com/pelson/Obvious-CI/master/bootstrap-obvious-ci-and-miniconda.py > bootstrap-obvious-ci-and-miniconda.py
 python bootstrap-obvious-ci-and-miniconda.py ~/miniconda x64 3 --without-obvci && source ~/miniconda/bin/activate root
 
 conda config --set show_channel_urls true
