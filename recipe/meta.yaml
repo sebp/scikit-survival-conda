@@ -14,24 +14,27 @@ source:
 build:
   # If this is a new build for the same version, increment the build
   # number. If you do not include this key, it defaults to 0.
-  number: 1
+  number: 2
   script: python setup.py install --single-version-externally-managed --record record.txt
 
 requirements:
   build:
-    - python {{ python }}
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
+    - python
     - setuptools
     - setuptools_scm
     - cython
-    - numpy {{ numpy }}
+    - numpy
     - scipy >=0.16
 
   run:
-    - python {{ python }}
+    - python
     - cvxopt  # [not win]
     - cvxpy
     - numexpr
-    - numpy {{ numpy }}
+    - {{ pin_compatible('numpy') }}
     - pandas >=0.19.0,<0.22
     - scikit-learn >=0.19.0,<0.20
     - scipy >=0.16
