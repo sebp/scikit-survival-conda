@@ -12,7 +12,7 @@ import tempfile
 
 from binstar_client.utils import get_server_api
 import binstar_client.errors
-import conda.config
+from conda_build.conda_interface import subdir as conda_subdir
 from conda.api import get_index
 from conda_build.metadata import MetaData
 from conda_build.api import get_output_file_paths
@@ -35,7 +35,7 @@ def built_distribution_already_exists(cli, pkg_name, meta, owner):
     exists on the owner/user's binstar account.
 
     """
-    distro_name = '{}/{}'.format(conda.config.subdir, pkg_name)
+    distro_name = '{}/{}'.format(conda_subdir, pkg_name)
 
     try:
         dist_info = cli.distribution(owner, meta.name(), meta.version(),
