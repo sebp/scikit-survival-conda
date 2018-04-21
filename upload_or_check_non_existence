@@ -2,10 +2,13 @@
 from __future__ import print_function
 
 import argparse
+import contextlib
 import hashlib
 import os
+import shutil
 import subprocess
 import sys
+import tempfile
 
 from binstar_client.utils import get_binstar
 import binstar_client.errors
@@ -14,6 +17,16 @@ from conda.api import get_index
 from conda_build.metadata import MetaData
 from conda_build.api import get_output_file_paths
 from conda_build.config import Config
+
+
+@contextlib.contextmanager
+def get_temp_token(token):
+    dn = tempfile.mkdtemp()
+    fn = os.path.join(dn, "binstar.token")
+    with open(fn, "w") as fh:
+        fh.write(token)
+    yield fn
+    shutil.rmtree(dn)
 
 
 def built_distribution_already_exists(cli, pkg_name, meta, owner):
@@ -35,16 +48,12 @@ def built_distribution_already_exists(cli, pkg_name, meta, owner):
 
 
 def upload(cli, fname, meta, owner, channels):
-    try:
-        with open('binstar.token', 'w') as fh:
-            fh.write(cli.token)
-        subprocess.check_call(['anaconda', '-t', 'binstar.token',
+    with get_temp_token(cli.token) as fn:
+        subprocess.check_call(['anaconda', '-t', fn,
                                'upload', fname,
                                '--user={}'.format(owner),
                                '--channel={}'.format(channels)],
                               env=os.environ)
-    finally:
-        os.remove('binstar.token')
 
 
 def main():
