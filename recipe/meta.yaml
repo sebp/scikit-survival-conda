@@ -1,6 +1,6 @@
 {% set name = "scikit-survival" %}
-{% set version = "0.5" %}
-{% set sha256 = "30686ccf57ba9116a0788e15a784193fbde31e0bb0ccb98716f189bba7289d48" %}
+{% set version = "0.6" %}
+{% set sha256 = "3c4fc1d9e59b229efa3a5a2729603e19ce40b4d503eb19c48519bdce1179c7b1" %}
 
 package:
   name: {{ name|lower }}
@@ -31,11 +31,11 @@ requirements:
 
   run:
     - python
-    - cvxopt  # [not win]
-    - cvxpy
+    - cvxopt >=1.2
+    - cvxpy <1.0
     - numexpr
     - {{ pin_compatible('numpy') }}
-    - pandas >=0.19.0,<0.22
+    - pandas >=0.19.0,<0.24
     - scikit-learn >=0.19.0,<0.20
     - scipy >=0.16
     - setuptools
