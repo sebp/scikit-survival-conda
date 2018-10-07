@@ -1,6 +1,6 @@
 {% set name = "scikit-survival" %}
-{% set version = "0.6" %}
-{% set sha256 = "3c4fc1d9e59b229efa3a5a2729603e19ce40b4d503eb19c48519bdce1179c7b1" %}
+{% set version = "0.6.0" %}
+{% set sha256 = "8af8ad74b757c136f0a13983e759ef89b3c2442b0e8611bbf14263c8c9bf9dab" %}
 
 package:
   name: {{ name|lower }}
@@ -14,7 +14,7 @@ source:
 build:
   # If this is a new build for the same version, increment the build
   # number. If you do not include this key, it defaults to 0.
-  number: 2
+  number: 0
   script: python setup.py install --single-version-externally-managed --record record.txt
 
 requirements:
