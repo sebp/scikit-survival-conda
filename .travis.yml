@@ -5,8 +5,11 @@ os: osx
 
 # Set BINSTAR_TOKEN
 env:
+    matrix:
+        - CONFIG=osx_py36
+        - CONFIG=osx_py37
     global:
-         secure: E0qkdruyft6nuN+40f0NnBapPV1+uwSx403c73YmoSLsQ+zApBlGlpuU6DMfljaxFxph4pfVT1UuH0BYo58OFtAya9bgo42o2S7KPd1KaBBQ649FaiHSRCYm4wzlei/KlNqx/baRwNETPybUVQW6c2De0gLLvfyJVhbUPFJouSttOxA9kzjBkoiEX6dP6BLU9x/oK0yOJ3d/tWxwwxb05l6hJRWVd/LIQI4B4JcWN3SmJNNfHtCu4baJYFqmTYsGxKbZt/dw/qVGEYQV/WdbpLTqmzka3SjHIbbLOgsvuqgbbLtvzyTbJfMNN8dxZdGmoyKpQjRZVpnimPQywLvXq37ubWZIXpBw2ykbXs21zyuaoFjygVXP+KuzC56OVj5cPodw1Ah5ot4CUvp3VeqaMJWEtQ5rlI1pDGyO9TIP2a2xxevLSRFLSAjBpTphs5I6OqDLO+QtY3UuxfmNl/Icm1SZgDbZ6SmcD0a/CD69ABKjKP0UOpley/Nq98sAoouA4Qp+0vMWbmEX+x27HT8boKPjQaAhcpxY2Cr1WWqwJeBtwJWMiyL21gL/KLKj3pt30b4l16BtWkiNzr2AmcHrze+eNobbwQ1195IdkWhqalDErkRmraPckXXRC/LN8Xo/y14lYJzHgnlQQlYrnajaLnDm7eGskAYpVOZjAaKCPBs=
+         secure: "E0qkdruyft6nuN+40f0NnBapPV1+uwSx403c73YmoSLsQ+zApBlGlpuU6DMfljaxFxph4pfVT1UuH0BYo58OFtAya9bgo42o2S7KPd1KaBBQ649FaiHSRCYm4wzlei/KlNqx/baRwNETPybUVQW6c2De0gLLvfyJVhbUPFJouSttOxA9kzjBkoiEX6dP6BLU9x/oK0yOJ3d/tWxwwxb05l6hJRWVd/LIQI4B4JcWN3SmJNNfHtCu4baJYFqmTYsGxKbZt/dw/qVGEYQV/WdbpLTqmzka3SjHIbbLOgsvuqgbbLtvzyTbJfMNN8dxZdGmoyKpQjRZVpnimPQywLvXq37ubWZIXpBw2ykbXs21zyuaoFjygVXP+KuzC56OVj5cPodw1Ah5ot4CUvp3VeqaMJWEtQ5rlI1pDGyO9TIP2a2xxevLSRFLSAjBpTphs5I6OqDLO+QtY3UuxfmNl/Icm1SZgDbZ6SmcD0a/CD69ABKjKP0UOpley/Nq98sAoouA4Qp+0vMWbmEX+x27HT8boKPjQaAhcpxY2Cr1WWqwJeBtwJWMiyL21gL/KLKj3pt30b4l16BtWkiNzr2AmcHrze+eNobbwQ1195IdkWhqalDErkRmraPckXXRC/LN8Xo/y14lYJzHgnlQQlYrnajaLnDm7eGskAYpVOZjAaKCPBs="
 
 before_install:
     # Remove homebrew.
@@ -24,6 +27,6 @@ install:
 
 script:
     - source ~/miniconda/bin/activate root
-    - conda build ./recipe
+    - conda build -m build_config/${CONFIG}.yaml ./recipe
     # from https://github.com/conda-forge/conda-forge-build-setup-feedstock/blob/master/recipe/upload_or_check_non_existence.py
-    - ./upload_or_check_non_existence ./recipe sebp --channel=main
+    - ./upload_or_check_non_existence -m build_config/${CONFIG}.yaml ./recipe sebp --channel=main

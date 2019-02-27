@@ -1,7 +1,9 @@
 version: 2
 jobs:
-  build:
+  build_linux_py36:
     machine: true
+    environment:
+      - CONFIG: "linux_py36"
 
     steps:
       - checkout
@@ -16,11 +18,45 @@ jobs:
           name: Build package
           command: |
             source ~/miniconda/bin/activate root
-            conda build ./recipe
+            conda build -m build_config/${CONFIG}.yaml ./recipe
 
       # Upload
       - run:
           name: Upload packages
           command: |
             source ~/miniconda/bin/activate root
-            ./upload_or_check_non_existence ./recipe sebp --channel=main
+            ./upload_or_check_non_existence -m build_config/${CONFIG}.yaml ./recipe sebp --channel=main
+
+  build_linux_py37:
+    machine: true
+    environment:
+      - CONFIG: "linux_py37"
+
+    steps:
+      - checkout
+
+      # Install
+      - run:
+          name: Install Miniconda3
+          command: ./install_miniconda.sh
+
+      # Build
+      - run:
+          name: Build package
+          command: |
+            source ~/miniconda/bin/activate root
+            conda build -m build_config/${CONFIG}.yaml ./recipe
+
+      # Upload
+      - run:
+          name: Upload packages
+          command: |
+            source ~/miniconda/bin/activate root
+            ./upload_or_check_non_existence -m build_config/${CONFIG}.yaml ./recipe sebp --channel=main
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build_linux_py36
+      - build_linux_py37

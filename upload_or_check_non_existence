@@ -64,6 +64,12 @@ def main():
                    'BINSTAR_TOKEN environment variable determines '
                    'whether the upload should actually take place.')
     parser = argparse.ArgumentParser(description=description)
+    parser.add_argument(
+        '-m', '--variant-config-files',
+        action="append",
+        help="""Additional variant config files to add.  These yaml files can contain
+        keys such as `c_compiler` and `target_platform` to form a build matrix."""
+    )
     parser.add_argument('recipe_dir', help='the conda recipe directory')
     parser.add_argument('owner', help='the binstar owner/user')
     parser.add_argument('--channel', help='the binstar channel', default='main')
@@ -77,7 +83,10 @@ def main():
         print("No upload to take place - this configuration was skipped in build/skip.")
         return
 
-    for fname in get_output_file_paths(args.recipe_dir):
+    config = Config()
+    config.set_keys(variant_config_files=args.variant_config_files)
+
+    for fname in get_output_file_paths(args.recipe_dir, config=config):
         pkg_name = os.path.basename(fname)
         exists = built_distribution_already_exists(cli, pkg_name, meta, owner)
         if token:
