@@ -74,7 +74,7 @@ test:
   requires:
     - pytest
   commands:
-    - python -m pytest -m "not slow"
+    - python -m pytest -m "not slow"  # [not osx]
 
 about:
   home: https://github.com/sebp/scikit-survival
