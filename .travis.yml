@@ -26,7 +26,7 @@ install:
     - ./install_miniconda.sh
 
 script:
-    - source ~/miniconda/bin/activate root
+    - source ~/miniconda/bin/activate base
     - conda build -m build_config/${CONFIG}.yaml ./recipe
     # from https://github.com/conda-forge/conda-forge-build-setup-feedstock/blob/master/recipe/upload_or_check_non_existence.py
     - ./upload_or_check_non_existence -m build_config/${CONFIG}.yaml ./recipe sebp --channel=main

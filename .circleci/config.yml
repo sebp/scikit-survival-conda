@@ -17,14 +17,14 @@ jobs:
       - run:
           name: Build package
           command: |
-            source ~/miniconda/bin/activate root
+            source ~/miniconda/bin/activate base
             conda build -m build_config/${CONFIG}.yaml ./recipe
 
       # Upload
       - run:
           name: Upload packages
           command: |
-            source ~/miniconda/bin/activate root
+            source ~/miniconda/bin/activate base
             ./upload_or_check_non_existence -m build_config/${CONFIG}.yaml ./recipe sebp --channel=main
 
   build_linux_py37:
@@ -44,14 +44,14 @@ jobs:
       - run:
           name: Build package
           command: |
-            source ~/miniconda/bin/activate root
+            source ~/miniconda/bin/activate base
             conda build -m build_config/${CONFIG}.yaml ./recipe
 
       # Upload
       - run:
           name: Upload packages
           command: |
-            source ~/miniconda/bin/activate root
+            source ~/miniconda/bin/activate base
             ./upload_or_check_non_existence -m build_config/${CONFIG}.yaml ./recipe sebp --channel=main
 
 workflows:
