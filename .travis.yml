@@ -23,6 +23,8 @@ before_install:
 
 install:
     # Install Miniconda.
+    - find /Applications/Xcode.app -name stdio.h
+    - ls Applications/Xcode-9.4.1.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/
     - ./install_miniconda.sh
 
 script:
