@@ -1,6 +1,6 @@
 {% set name = "scikit-survival" %}
-{% set version = "0.8" %}
-{% set sha256 = "456983190a1054615e2efd5e7aeeec4a06da009c94d71ebe6f6f769b30c87c6f" %}
+{% set version = "0.9" %}
+{% set sha256 = "e707cea07cac3ab33811fa8db74f3729c9e9bde59654db98c871560c5e73e095" %}
 
 package:
   name: {{ name|lower }}
@@ -14,7 +14,7 @@ source:
 build:
   # If this is a new build for the same version, increment the build
   # number. If you do not include this key, it defaults to 0.
-  number: 1
+  number: 0
   script: python setup.py install --single-version-externally-managed --record record.txt
 
 requirements:
@@ -34,9 +34,9 @@ requirements:
     - cvxpy >=1.0
     - numexpr
     - {{ pin_compatible('numpy') }}
-    - pandas >=0.19.0,<0.24
-    - scikit-learn >=0.19.0,<0.21
-    - scipy >=0.16,<1.3.0
+    - pandas >=0.21.0,<0.25
+    - scikit-learn >=0.20.0,<0.22
+    - scipy >=1.0,<1.3.0
     - setuptools
 
 test:
