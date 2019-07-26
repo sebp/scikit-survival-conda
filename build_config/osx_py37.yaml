@@ -1,3 +1,5 @@
+CONDA_BUILD_SYSROOT:
+- /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 c_compiler:
@@ -9,8 +11,8 @@ cxx_compiler:
 cxx_compiler_version:
 - '4'
 python:
-    - 3.7
+- '3.7'
 numpy:
-    - 1.14
+- '1.14'
 blas_impl:
-    - mkl
+- mkl

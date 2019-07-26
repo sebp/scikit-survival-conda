@@ -23,7 +23,6 @@ before_install:
 
 install:
     # Install Miniconda.
-    - find /Library -name stdio.h
     - ./install_miniconda.sh
 
 script:
