@@ -1,6 +1,10 @@
+c_compiler:
+- vs2015
+cxx_compiler:
+- vs2015
 python:
-    - 3.7
+- '3.7'
 numpy:
-    - 1.14
+- '1.14'
 blas_impl:
-    - mkl
+- mkl
