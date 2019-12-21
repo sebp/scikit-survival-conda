@@ -80,7 +80,8 @@ test:
   requires:
     - pytest
   commands:
-    - python -m pytest -m "not slow"  # [not osx]
+    - pytest --fixtures .
+    - pytest -m "not slow"  # [not osx]
 
 about:
   home: https://github.com/sebp/scikit-survival
