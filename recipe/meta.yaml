@@ -14,8 +14,8 @@ source:
 build:
   # If this is a new build for the same version, increment the build
   # number. If you do not include this key, it defaults to 0.
-  number: 0
-  script: python setup.py install --single-version-externally-managed --record record.txt
+  number: 1
+  script: {{ PYTHON }} -m pip install --no-deps --ignore-installed .
 
 requirements:
   build:
@@ -23,7 +23,7 @@ requirements:
     - {{ compiler('cxx') }}
   host:
     - python
-    - setuptools
+    - pip
     - setuptools_scm
     - cython >=0.29
     - numpy
