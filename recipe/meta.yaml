@@ -78,7 +78,8 @@ test:
   source_files:
     - tests/*
   requires:
-    - pytest
+    - pytest  # [not win]
+    - pytest <5.1.2  # [win]
   commands:
     - pytest --fixtures .
     - pytest -m "not slow"  # [not osx]
