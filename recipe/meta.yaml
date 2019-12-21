@@ -1,6 +1,6 @@
 {% set name = "scikit-survival" %}
-{% set version = "0.10" %}
-{% set sha256 = "ade8e5ba6494bd02762d6d99d9767f11f8dafa4cefb05d1289edda4e116cdafc" %}
+{% set version = "0.11" %}
+{% set sha256 = "25c8e3d121caf05f602174dbc8d2b552310ec27c0c22f3fbd7717b99b18b8760" %}
 
 package:
   name: {{ name|lower }}
@@ -34,8 +34,9 @@ requirements:
     - cvxpy >=1.0
     - numexpr
     - {{ pin_compatible('numpy') }}
-    - pandas >=0.21.0,<0.25
-    - scikit-learn >=0.20.0,<0.22
+    - osqp !=0.6.0,!=0.6.1
+    - pandas >=0.21.0,<0.26
+    - scikit-learn >=0.21.0,<0.22
     - scipy >=1.0,!=1.3.0
     - setuptools
 
@@ -50,6 +51,7 @@ test:
     - sksurv.datasets
     - sksurv.ensemble
     - sksurv.ensemble.boosting
+    - sksurv.ensemble.forest
     - sksurv.ensemble.survival_loss
     - sksurv.io
     - sksurv.io.arffread
@@ -69,6 +71,8 @@ test:
     - sksurv.svm.minlip
     - sksurv.svm.naive_survival_svm
     - sksurv.svm.survival_svm
+    - sksurv.tree
+    - sksurv.tree.tree
     - sksurv.util
   source_files:
     - tests/*
