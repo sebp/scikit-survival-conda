@@ -1,0 +1,30 @@
+name: conda-build-posix
+on: [push]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        config: [py36, py37]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Miniconda
+        run: |
+          $CONDA/bin/conda config --set always_yes yes --set changeps1 no
+          $CONDA/bin/conda config --set auto_update_conda false
+          $CONDA/bin/conda config --set show_channel_urls true
+          $CONDA/bin/conda config --set add_pip_as_python_dependency false
+          $CONDA/bin/conda config --add channels sebp
+          sudo $CONDA/bin/conda update -q -n base conda
+          sudo $CONDA/bin/conda install -q -n base anaconda-client conda-build
+          $CONDA/bin/conda info --all
+          $CONDA/bin/conda config --show
+      - name: Build package
+        run: sudo $CONDA/bin/conda-build -m build_config/${{ runner.os }}-${{ matrix.config }}.yaml ./recipe
+      - name: Upload package
+        env:
+          BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
+        run: $CONDA/bin/python3 upload_or_check_non_existence -m build_config/${{ runner.os }}-${{ matrix.config }}.yaml ./recipe sebp --channel=main
