@@ -28,7 +28,7 @@ jobs:
         run: sudo ./setup-osx.sh
         if: runner.os == 'macOS'
       - name: Build package
-        run: sudo $CONDA/bin/conda-build -m build_config/${{ runner.os }}-${{ matrix.config }}.yaml ./recipe
+        run: $CONDA/bin/conda-build -m build_config/${{ runner.os }}-${{ matrix.config }}.yaml ./recipe
       - name: Upload package
         env:
           BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
