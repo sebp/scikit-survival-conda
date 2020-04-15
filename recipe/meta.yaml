@@ -79,7 +79,8 @@ test:
     - tests/*
   requires:
     - pytest  # [not win]
-    - pytest <5.1.2  # [win]
+    - pytest <5.1.2  # [win and py<38]
+    - pytest >=5.4.0 # [win and py>=38]
   commands:
     - pytest --fixtures .
     - pytest -m "not slow"  # [not osx]
