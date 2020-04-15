@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        config: [py36, py37]
+        config: [py36, py37, py38]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -20,11 +20,17 @@ jobs:
           $CONDA/bin/conda config --add channels sebp
           sudo $CONDA/bin/conda update -q -n base conda
           sudo $CONDA/bin/conda install -q -n base anaconda-client conda-build
+          sudo chown -R $USER $CONDA
           $CONDA/bin/conda info --all
           $CONDA/bin/conda config --show
+          echo "::add-path::${CONDA}/bin:${PATH}"
+      - name: Configure conda and conda-build
+        run: sudo ./setup-osx.sh
+        if: runner.os == 'macOS'
       - name: Build package
         run: sudo $CONDA/bin/conda-build -m build_config/${{ runner.os }}-${{ matrix.config }}.yaml ./recipe
       - name: Upload package
         env:
           BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
         run: $CONDA/bin/python3 upload_or_check_non_existence -m build_config/${{ runner.os }}-${{ matrix.config }}.yaml ./recipe sebp --channel=main
+        if: github.ref == 'refs/heads/master'

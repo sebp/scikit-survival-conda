@@ -13,9 +13,9 @@ cxx_compiler_version:
 macos_machine:
 - x86_64-apple-darwin13.4.0
 python:
-- '3.7'
+- '3.8'
 numpy:
-- '1.14'
+- '1.17'
 blas_impl:
 - mkl
 mkl:
