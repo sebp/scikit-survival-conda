@@ -18,5 +18,3 @@ numpy:
 - '1.17'
 blas_impl:
 - mkl
-mkl:
-- 2019
