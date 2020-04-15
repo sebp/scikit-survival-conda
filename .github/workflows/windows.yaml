@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest]
-        config: [py36, py37]
+        config: [py36, py37, py38]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -33,5 +33,7 @@ jobs:
         env:
           BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
         run: |
+          set "PATH=%CONDA%\\Scripts;%CONDA%\\Library\\bin;%PATH%"
           %CONDA%\python upload_or_check_non_existence -m build_config\${{ runner.os }}-${{ matrix.config }}.yaml recipe sebp --channel=main
         shell: cmd
+        if: github.ref == 'refs/heads/master'
