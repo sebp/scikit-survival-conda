@@ -1,6 +1,6 @@
 {% set name = "scikit-survival" %}
-{% set version = "0.12.0" %}
-{% set sha256 = "130024122f95676be8e589c76608f5c8c35a83028b980a540549e9b1134a203c" %}
+{% set version = "0.13.0" %}
+{% set sha256 = "9472cb27f4fcdccc67ce05324b4308b19ce237ca99c4ccfa53e89c09392bf78d" %}
 
 package:
   name: {{ name|lower }}
@@ -14,7 +14,7 @@ source:
 build:
   # If this is a new build for the same version, increment the build
   # number. If you do not include this key, it defaults to 0.
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install --no-deps --ignore-installed -vvv .
 
 requirements:
@@ -27,7 +27,7 @@ requirements:
     - setuptools_scm
     - cython >=0.29
     - numpy
-    - scikit-learn >=0.22.0,<0.23
+    - scikit-learn >=0.22.0,<0.24
 
   run:
     - python
@@ -35,9 +35,10 @@ requirements:
     - cvxpy >=1.0
     - numexpr
     - {{ pin_compatible('numpy') }}
+    - joblib
     - osqp !=0.6.0,!=0.6.1
     - pandas >=0.21.0
-    - scikit-learn >=0.22.0,<0.23
+    - scikit-learn >=0.22.0,<0.24
     - scipy >=1.0,!=1.3.0
     - setuptools
 
