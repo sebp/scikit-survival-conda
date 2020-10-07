@@ -84,7 +84,7 @@ test:
     - pytest >=5.4.0 # [win and py>=38]
   commands:
     - pytest --fixtures .
-    - pytest -m "not slow"  # [not osx]
+    - pytest -m "not slow"  # [linux]
 
 about:
   home: https://github.com/sebp/scikit-survival
