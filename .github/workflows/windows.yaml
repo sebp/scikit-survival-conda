@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest]
-        config: [py36, py37, py38]
+        config: [py37, py38, py39]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
