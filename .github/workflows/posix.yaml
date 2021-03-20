@@ -23,7 +23,6 @@ jobs:
           sudo chown -R $USER $CONDA
           $CONDA/bin/conda info --all
           $CONDA/bin/conda config --show
-          echo "::add-path::${CONDA}/bin:${PATH}"
       - name: Configure conda and conda-build
         run: sudo ./setup-osx.sh
         if: runner.os == 'macOS'
@@ -32,5 +31,7 @@ jobs:
       - name: Upload package
         env:
           BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
-        run: $CONDA/bin/python3 upload_or_check_non_existence -m build_config/${{ runner.os }}-${{ matrix.config }}.yaml ./recipe sebp --channel=main
+        run: |
+          export PATH=$CONDA/bin:$PATH
+          $CONDA/bin/python3 upload_or_check_non_existence -m build_config/${{ runner.os }}-${{ matrix.config }}.yaml ./recipe sebp --channel=main
         if: github.ref == 'refs/heads/master'
