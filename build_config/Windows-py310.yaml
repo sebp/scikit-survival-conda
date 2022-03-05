@@ -1,0 +1,10 @@
+c_compiler:
+- vs2017
+cxx_compiler:
+- vs2017
+python:
+- '3.10'
+numpy:
+- '1.21'
+target_platform:
+- win-64

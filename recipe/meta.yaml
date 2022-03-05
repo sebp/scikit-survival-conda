@@ -1,6 +1,6 @@
 {% set name = "scikit-survival" %}
-{% set version = "0.17.0" %}
-{% set sha256 = "ba49325f6a31e8bdccfb88337aa85218d209e88a6a704e9c41ef13bf749e0f46" %}
+{% set version = "0.17.1" %}
+{% set sha256 = "4b1fab7992816da863915828f210bc10fe6f32c4619e9af01a32ae990a87f379" %}
 
 package:
   name: {{ name|lower }}
@@ -15,7 +15,7 @@ build:
   # If this is a new build for the same version, increment the build
   # number. If you do not include this key, it defaults to 0.
   number: 0
-  script: {{ PYTHON }} -m pip install --no-deps --ignore-installed -vvv .
+  script: {{ PYTHON }} -m pip install -vvv .
 
 requirements:
   build:
@@ -24,6 +24,7 @@ requirements:
   host:
     - python
     - pip
+    - packaging
     - setuptools_scm
     - cython >=0.29.16,<3.0
     - numpy

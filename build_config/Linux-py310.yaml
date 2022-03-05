@@ -1,0 +1,8 @@
+python:
+    - '3.10'
+numpy:
+    - '1.21'
+blas_impl:
+    - mkl
+target_platform:
+    - linux-64

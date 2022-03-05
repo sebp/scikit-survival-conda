@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        config: [py37, py38, py39]
+        config: [py37, py38, py39, py310]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
