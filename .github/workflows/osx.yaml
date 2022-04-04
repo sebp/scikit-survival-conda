@@ -1,12 +1,13 @@
-name: conda-build-posix
+name: conda-build-osx
 on: [push]
 
 jobs:
   build:
     strategy:
       matrix:
-        config: [py37, py38, py39, py310]
-    runs-on: ubuntu-latest
+        config: [py310]
+        target: ['11.0']
+    runs-on: macos-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -22,8 +23,10 @@ jobs:
           sudo chown -R $USER $CONDA
           $CONDA/bin/conda info --all
           $CONDA/bin/conda config --show
+      - name: Configure conda and conda-build
+        run: sudo ./setup-osx.sh "${{ matrix.target }}"
       - name: Build package
-        run: $CONDA/bin/conda-build -m build_config/${{ runner.os }}-${{ matrix.config }}.yaml ./recipe
+        run: $CONDA/bin/conda-build -m build_config/${{ runner.os }}-arm64-${{ matrix.config }}.yaml ./recipe
       - name: Upload package
         env:
           BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
