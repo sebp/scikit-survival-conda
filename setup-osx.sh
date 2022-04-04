@@ -11,7 +11,8 @@ export PYTHONUNBUFFERED=1
 
 export MACOSX_DEPLOYMENT_TARGET="${1:-10.9}"
 
-export CONDA_BUILD_SYSROOT="$(xcode-select -p)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk"
+OSX_SDK_DIR="$(xcode-select -p)/Platforms/MacOSX.platform/Developer/SDKs"
+export CONDA_BUILD_SYSROOT="${OSX_SDK_DIR}/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk"
 
 if [[ ! -d "${CONDA_BUILD_SYSROOT}" || "${OSX_FORCE_SDK_DOWNLOAD}" == "1" ]]; then
     echo "Downloading ${MACOSX_DEPLOYMENT_TARGET} sdk"
@@ -26,7 +27,7 @@ if [[ "${MACOSX_DEPLOYMENT_TARGET}" == 10.* && "${USING_SYSTEM_SDK_DIR:-}" == "1
     plutil -replace DTSDKName -string macosx${MACOSX_DEPLOYMENT_TARGET}internal $(xcode-select -p)/Platforms/MacOSX.platform/Info.plist
 fi
 
-if [[ -d "${CONDA_BUILD_SYSROOT}" ]]; then
+if [ -d "${CONDA_BUILD_SYSROOT}" ]
 then
     echo "Found CONDA_BUILD_SYSROOT: ${CONDA_BUILD_SYSROOT}"
 else
