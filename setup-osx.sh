@@ -9,7 +9,7 @@ export CPU_COUNT=2
 
 export PYTHONUNBUFFERED=1
 
-export MACOSX_DEPLOYMENT_TARGET='${1:-10.9}'
+export MACOSX_DEPLOYMENT_TARGET="${1:-10.9}"
 
 export CONDA_BUILD_SYSROOT="$(xcode-select -p)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk"
 
