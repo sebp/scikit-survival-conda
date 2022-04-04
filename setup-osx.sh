@@ -13,11 +13,11 @@ export MACOSX_DEPLOYMENT_TARGET="${1:-10.9}"
 
 export CONDA_BUILD_SYSROOT="$(xcode-select -p)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk"
 
-if [[ ! -d ${CONDA_BUILD_SYSROOT} || "$OSX_FORCE_SDK_DOWNLOAD" == "1" ]]; then
+if [[ ! -d "${CONDA_BUILD_SYSROOT}" || "${OSX_FORCE_SDK_DOWNLOAD}" == "1" ]]; then
     echo "Downloading ${MACOSX_DEPLOYMENT_TARGET} sdk"
-    curl -L -O https://github.com/phracker/MacOSX-SDKs/releases/download/11.3/MacOSX${MACOSX_SDK_VERSION}.sdk.tar.xz
+    curl -L -O https://github.com/phracker/MacOSX-SDKs/releases/download/11.3/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk.tar.xz
     mkdir -p "$(dirname "$CONDA_BUILD_SYSROOT")"
-    tar -xf MacOSX${MACOSX_SDK_VERSION}.sdk.tar.xz -C "$(dirname "$CONDA_BUILD_SYSROOT")"
+    tar -xf MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk.tar.xz -C "$(dirname "$CONDA_BUILD_SYSROOT")"
 fi
 
 if [[ "${MACOSX_DEPLOYMENT_TARGET}" == 10.* && "${USING_SYSTEM_SDK_DIR:-}" == "1" ]]; then
@@ -26,7 +26,7 @@ if [[ "${MACOSX_DEPLOYMENT_TARGET}" == 10.* && "${USING_SYSTEM_SDK_DIR:-}" == "1
     plutil -replace DTSDKName -string macosx${MACOSX_DEPLOYMENT_TARGET}internal $(xcode-select -p)/Platforms/MacOSX.platform/Info.plist
 fi
 
-if [ -d "${CONDA_BUILD_SYSROOT}" ]
+if [[ -d "${CONDA_BUILD_SYSROOT}" ]]; then
 then
     echo "Found CONDA_BUILD_SYSROOT: ${CONDA_BUILD_SYSROOT}"
 else
