@@ -1,6 +1,6 @@
 {% set name = "scikit-survival" %}
-{% set version = "0.18.0" %}
-{% set sha256 = "2df4044a62b1489e2d5a5a771194c16a33b1642dc810e52d2665fc03944ea665" %}
+{% set version = "0.19.0" %}
+{% set sha256 = "5f13814864792c46d748384a46e928622536088561eac45f9f73c6edefea0805" %}
 
 package:
   name: {{ name|lower }}
@@ -28,7 +28,7 @@ requirements:
     - setuptools_scm
     - cython >=0.29.16,<3.0
     - numpy
-    - scikit-learn >=1.1,<1.2
+    - scikit-learn >=1.1.2,<1.2
 
   run:
     - python
@@ -38,7 +38,7 @@ requirements:
     - joblib
     - osqp !=0.6.0,!=0.6.1
     - pandas >=1.0.5
-    - scikit-learn >=1.1,<1.2
+    - scikit-learn >=1.1.2,<1.2
     - scipy >=1.3.2
     - setuptools
 
