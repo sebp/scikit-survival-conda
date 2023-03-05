@@ -1,6 +1,6 @@
 {% set name = "scikit-survival" %}
-{% set version = "0.19.0" %}
-{% set sha256 = "5f13814864792c46d748384a46e928622536088561eac45f9f73c6edefea0805" %}
+{% set version = "0.20.0" %}
+{% set sha256 = "db8fbc4a8722ababb72a7a0649d57939de6dfce4f5b8f92fd7d8b7a797b32e3c" %}
 
 package:
   name: {{ name|lower }}
