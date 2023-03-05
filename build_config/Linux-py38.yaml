@@ -1,7 +1,7 @@
 python:
     - '3.8'
 numpy:
-    - '1.19'
+    - '1.20'
 blas_impl:
     - mkl
 target_platform:

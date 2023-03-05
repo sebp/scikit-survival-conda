@@ -1,7 +1,7 @@
 c_compiler:
-- vs2017
+- vs2019
 cxx_compiler:
-- vs2017
+- vs2019
 python:
 - '3.10'
 numpy:

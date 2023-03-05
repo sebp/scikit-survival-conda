@@ -1,8 +1,8 @@
-name: conda-build-posix
+name: conda-build
 on: [push]
 
 jobs:
-  build:
+  build-posix:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
@@ -34,4 +34,40 @@ jobs:
         run: |
           export PATH=$CONDA/bin:$PATH
           $CONDA/bin/python3 upload_or_check_non_existence -m build_config/${{ runner.os }}-${{ matrix.config }}.yaml ./recipe sebp --channel=main
+        if: github.ref == 'refs/heads/master'
+
+  build-windows:
+    strategy:
+      matrix:
+        os: [windows-2019]
+        config: [py38, py39, py310]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Miniconda
+        run: |
+          set "PATH=%CONDA%\\Scripts;%CONDA%\\Library\\bin;%PATH%"
+          conda config --set always_yes yes --set changeps1 no
+          conda config --set auto_update_conda false
+          conda config --set show_channel_urls true
+          conda config --set add_pip_as_python_dependency false
+          conda config --add channels sebp
+          conda update -q -n base -c defaults conda
+          conda install -q -n base anaconda-client conda-build
+          conda info --all
+          conda config --show
+        shell: cmd
+      - name: Build package
+        run: |
+          set "PATH=%CONDA%\\Scripts;%CONDA%\\Library\\bin;%PATH%"
+          conda-build -m build_config\${{ runner.os }}-${{ matrix.config }}.yaml recipe
+        shell: cmd
+      - name: Upload package
+        env:
+          BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
+        run: |
+          set "PATH=%CONDA%\\Scripts;%CONDA%\\Library\\bin;%PATH%"
+          %CONDA%\python upload_or_check_non_existence -m build_config\${{ runner.os }}-${{ matrix.config }}.yaml recipe sebp --channel=main
+        shell: cmd
         if: github.ref == 'refs/heads/master'
