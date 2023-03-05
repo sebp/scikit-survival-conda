@@ -28,7 +28,7 @@ requirements:
     - setuptools_scm
     - cython >=0.29.16,<3.0
     - numpy
-    - scikit-learn >=1.1.2,<1.2
+    - scikit-learn >=1.2.0,<1.3
 
   run:
     - python
@@ -38,7 +38,7 @@ requirements:
     - joblib
     - osqp !=0.6.0,!=0.6.1
     - pandas >=1.0.5
-    - scikit-learn >=1.1.2,<1.2
+    - scikit-learn >=1.2.0,<1.4
     - scipy >=1.3.2
     - setuptools
 
