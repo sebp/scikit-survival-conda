@@ -1,6 +1,6 @@
 {% set name = "scikit-survival" %}
-{% set version = "0.20.0" %}
-{% set sha256 = "db8fbc4a8722ababb72a7a0649d57939de6dfce4f5b8f92fd7d8b7a797b32e3c" %}
+{% set version = "0.21.0" %}
+{% set sha256 = "adc744b65983dced8142ec31465389fc738405d589051251e5447aad9a1e02bc" %}
 
 package:
   name: {{ name|lower }}
@@ -35,10 +35,11 @@ requirements:
     - ecos
     - numexpr
     - {{ pin_compatible('numpy') }}
+    - importlib-resources >=1.3  # [py38]
     - joblib
     - osqp !=0.6.0,!=0.6.1
     - pandas >=1.0.5
-    - scikit-learn >=1.2.0,<1.4
+    - scikit-learn >=1.2.0,<1.3
     - scipy >=1.3.2
     - setuptools
 
