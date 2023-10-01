@@ -4,6 +4,7 @@ on: [push]
 jobs:
   build-posix:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
         config: [py38, py39, py310, py311]
