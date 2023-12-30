@@ -18,6 +18,7 @@ jobs:
           $CONDA/bin/conda config --set auto_update_conda false
           $CONDA/bin/conda config --set show_channel_urls true
           $CONDA/bin/conda config --set add_pip_as_python_dependency false
+          $CONDA/bin/conda config --set conda_build.pkg_format 2
           $CONDA/bin/conda config --add channels sebp
           sudo $CONDA/bin/conda update -q -n base conda
           sudo $CONDA/bin/conda install -q -n base anaconda-client conda-build
@@ -53,6 +54,7 @@ jobs:
           conda config --set auto_update_conda false
           conda config --set show_channel_urls true
           conda config --set add_pip_as_python_dependency false
+          conda config --set conda_build.pkg_format 2
           conda config --add channels sebp
           conda update -q -n base -c defaults conda
           conda install -q -n base anaconda-client conda-build
