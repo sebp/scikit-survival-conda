@@ -2,7 +2,5 @@ python:
     - '3.9'
 numpy:
     - '1.21'
-blas_impl:
-    - mkl
 target_platform:
     - linux-64

@@ -1,7 +1,7 @@
 CONDA_BUILD_SYSROOT:
 - '/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk'
 MACOSX_DEPLOYMENT_TARGET:
-- '10.13'
+- '10.9'
 c_compiler:
 - clang
 c_compiler_version:
@@ -13,8 +13,12 @@ cxx_compiler_version:
 macos_machine:
 - x86_64-apple-darwin13.4.0
 python:
-- '3.9'
+- '3.12'
 numpy:
-- '1.21'
+- '1.26'
+blas_impl:
+- openblas
+openblas:
+- 0.3
 target_platform:
 - osx-64

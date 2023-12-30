@@ -3,8 +3,8 @@ c_compiler:
 cxx_compiler:
 - vs2019
 python:
-- '3.8'
+- '3.12'
 numpy:
-- '1.21'
+- '1.26'
 target_platform:
 - win-64

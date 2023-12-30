@@ -16,9 +16,5 @@ python:
 - '3.8'
 numpy:
 - '1.21'
-blas_impl:
-- mkl
-mkl:
-- 2021
 target_platform:
 - osx-64
