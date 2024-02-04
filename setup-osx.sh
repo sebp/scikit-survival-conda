@@ -9,13 +9,18 @@ export CPU_COUNT=2
 
 export PYTHONUNBUFFERED=1
 
-export MACOSX_DEPLOYMENT_TARGET=10.9
+CPU_ARCH=$(arch)
+if [[ "${CPU_ARCH:-}" == "arm64" ]]; then
+    export MACOSX_DEPLOYMENT_TARGET=11.1
+else
+    export MACOSX_DEPLOYMENT_TARGET=10.9
+fi
 
 export CONDA_BUILD_SYSROOT="$(xcode-select -p)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk"
 
 if [[ ! -d ${CONDA_BUILD_SYSROOT} || "$OSX_FORCE_SDK_DOWNLOAD" == "1" ]]; then
     echo "Downloading ${MACOSX_DEPLOYMENT_TARGET} sdk"
-    curl -L -O https://github.com/phracker/MacOSX-SDKs/releases/download/10.13/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk.tar.xz
+    curl -L -O https://github.com/phracker/MacOSX-SDKs/releases/download/11.0-11.1/MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk.tar.xz
     tar -xf MacOSX${MACOSX_DEPLOYMENT_TARGET}.sdk.tar.xz -C "$(dirname "$CONDA_BUILD_SYSROOT")"
     # set minimum sdk version to our target
     plutil -replace MinimumSDKVersion -string ${MACOSX_DEPLOYMENT_TARGET} $(xcode-select -p)/Platforms/MacOSX.platform/Info.plist

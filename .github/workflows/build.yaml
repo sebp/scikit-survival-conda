@@ -6,8 +6,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        config: [py38, py39, py310, py311, py312]
+        os: [ubuntu-latest, macos-13, macos-14]
+        config: [py39, py310, py311, py312]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -35,7 +35,7 @@ jobs:
           BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
         run: |
           export PATH=$CONDA/bin:$PATH
-          $CONDA/bin/python3 upload_or_check_non_existence -m build_config/${{ runner.os }}-${{ matrix.config }}.yaml ./recipe sebp --channel=main
+          $CONDA/bin/python3 upload_or_check_non_existence -m build_config/${{ runner.os }}-${{ runner.arch }}-${{ matrix.config }}.yaml ./recipe sebp --channel=main
         if: github.ref == 'refs/heads/master'
 
   build-windows:
