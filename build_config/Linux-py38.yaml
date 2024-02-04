@@ -1,6 +1,0 @@
-python:
-    - '3.8'
-numpy:
-    - '1.21'
-target_platform:
-    - linux-64
