@@ -9,23 +9,23 @@ run_check_sha() {
 
 if [[ "${CONDA:-}" = "" ]]; then
     # download and install conda
-    MINICONDA_VERSION="Miniconda3-py311_23.11.0-2"
+    MINICONDA_VERSION="Miniconda3-py312_24.1.2-0"
 
     if [[ "${RUNNER_OS}" = "macOS" ]] && [[ "${RUNNER_ARCH}" = "ARM64" ]]; then
         MINICONDA_VERSION="${MINICONDA_VERSION}-MacOSX-arm64"
-        MINICONDA_HASH="5694c382e6056d62ed874f22692224c4f53bca22e8135b6f069111e081be07aa"
+        MINICONDA_HASH="1c277b1ec046fd1b628390994e3fa3dbac0e364f44cd98b915daaa67a326c66a"
     elif [[ "${RUNNER_OS}" = "macOS" ]] && [[ "${RUNNER_ARCH}" = "X64" ]]; then
         MINICONDA_VERSION="${MINICONDA_VERSION}-MacOSX-x86_64"
-        MINICONDA_HASH="2b7f9e46308c28c26dd83abad3e72121ef63916eaf17b63723b5a1f728dc3032"
+        MINICONDA_HASH="bc45a2ceea9341579532847cc9f29a9769d60f12e306bba7f0de6ad5acdd73e9"
     elif [[ "${RUNNER_OS}" = "Linux" ]] && [[ "${RUNNER_ARCH}" = "X64" ]]; then
         MINICONDA_VERSION="${MINICONDA_VERSION}-Linux-x86_64"
-        MINICONDA_HASH="c9ae82568e9665b1105117b4b1e499607d2a920f0aea6f94410e417a0eff1b9c"
+        MINICONDA_HASH="b978856ec3c826eb495b60e3fffe621f670c101150ebcbdeede4f961f22dc438"
     else
         echo "Unsupported OS or ARCH: ${RUNNER_OS} ${RUNNER_ARCH}"
         exit 1
     fi
 
-    export CONDA="${GITHUB_WORKSPACE}/miniconda3"
+    export CONDA="${RUNNER_TEMP}/miniconda3"
 
     mkdir -p "${CONDA}" && \
     curl "https://repo.anaconda.com/miniconda/${MINICONDA_VERSION}.sh" -o "${CONDA}/miniconda.sh" && \
@@ -36,7 +36,8 @@ if [[ "${CONDA:-}" = "" ]]; then
     echo "CONDA=${CONDA}" >> "${GITHUB_ENV}"
 fi
 
-"${CONDA}/bin/conda" config --set always_yes yes --set changeps1 no && \
+"${CONDA}/bin/conda" config --set always_yes yes && \
+"${CONDA}/bin/conda" config --set changeps1 no && \
 "${CONDA}/bin/conda" config --set auto_update_conda false && \
 "${CONDA}/bin/conda" config --set show_channel_urls true && \
 "${CONDA}/bin/conda" config --set add_pip_as_python_dependency false && \
@@ -48,6 +49,8 @@ sudo "${CONDA}/bin/conda" update -q -n base conda && \
 sudo "${CONDA}/bin/conda" install -q -n base anaconda-client conda-build && \
 sudo chown -R "${USER}" "${CONDA}" || \
 exit 1
+
+echo "${CONDA}" >> "${GITHUB_PATH}"
 
 "${CONDA}/bin/conda" info --all
 "${CONDA}/bin/conda" config --show
